@@ -50,35 +50,37 @@ const DocsVerification = () => {
     const keys = Object.keys(doc).filter(
       (key) => key !== "id" && key !== "name"
     );
-
-    // Calculate status for each document type
-    const documentStatuses = keys.map(key => {
+  
+    // Check if any document is rejected
+    const hasRejectedDocs = keys.some(key => {
       const item = doc[key];
-      
-      // Handle array of documents (like other_docs)
+      // For array of documents
       if (Array.isArray(item)) {
-        // If any doc is pending, return pending
-        // If all docs are approved, return approved
-        // If any doc is rejected, return rejected
-        if (item.some(doc => doc.status === 1)) return 1; // Pending
-        if (item.every(doc => doc.status === 2)) return 2; // Approved
-        if (item.some(doc => doc.status === 3)) return 3; // Rejected
+        return item.some(doc => doc.status === 3);
       }
-      
-      // Handle single documents
-      if (typeof item === 'object' && item.status) {
-        return item.status;
-      }
-      
-      return 1; // Default to pending
+      // For single documents
+      return item.status === 3;
     });
-
-    // Determine overall status
-    if (documentStatuses.some(status => status === 1)) return 1; // Pending
-    if (documentStatuses.every(status => status === 2)) return 2; // Approved
-    if (documentStatuses.some(status => status === 3)) return 3; // Rejected
-
-    return 1; // Default to pending
+  
+    // If any document is rejected, overall status is rejected
+    if (hasRejectedDocs) return 3;
+  
+    // Check if any document is pending
+    const hasPendingDocs = keys.some(key => {
+      const item = doc[key];
+      // For array of documents
+      if (Array.isArray(item)) {
+        return item.some(doc => doc.status === 1);
+      }
+      // For single documents
+      return item.status === 1;
+    });
+  
+    // If any document is pending, overall status is pending
+    if (hasPendingDocs) return 1;
+  
+    // If no documents are pending or rejected, all are approved
+    return 2;
   };
 
   const getStatusLabel = (status) => {

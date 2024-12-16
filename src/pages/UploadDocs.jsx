@@ -186,7 +186,6 @@ const UploadDocs = () => {
           // If image is blurry, show error and skip this file
           toast.error(`${fileObj.file.name} is too blurry. Please upload a clearer image.`, {
             position: "top-right",
-            style: { fontSize: "1.25rem", padding: "1rem" },
             autoClose: 3000,
           });
           //alert(`${fileObj.file.name} is too blurry. Please upload a clearer image.`);
@@ -241,6 +240,7 @@ const UploadDocs = () => {
   };
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center p-6">
+       <ToastContainer />
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
         <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
           Upload Your Documents

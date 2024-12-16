@@ -103,6 +103,7 @@ const ReviewModal = ({ application, onClose, onReviewComplete }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
+       <ToastContainer />
       <div className="bg-white w-full max-w-6xl h-5/6 rounded-2xl shadow-2xl overflow-hidden flex">
         {/* Left Side - Application Details */}
         <div className="w-1/2 p-8 overflow-y-auto bg-gray-50 border-r">
@@ -565,6 +566,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
+       <ToastContainer />
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-blue-700 flex items-center">
