@@ -32,7 +32,6 @@ import "./App.css";
 import AboutPage from "./pages/Home_About";
 import ProtectedRoute from "./pages/ProtectedRoutes";
 import ForbiddenPage from "./pages/forbidden";
-import Contactd from "./pages/contactd";
 
 const App = () => {
   return (
